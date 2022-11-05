@@ -40,13 +40,14 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 floating_modifier $mod
 
 # Start a terminal
-bindsym $mod+Return exec alacritty
+bindsym $mod+Return exec kitty
 
 # Kill focused window
 bindsym $mod+Shift+q kill
 
 # Program launcher (dmenu or rofi)
-bindsym $mod+d exec --no-startup-id dmenu_run
+#bindsym $mod+d exec --no-startup-id dmenu_run
+bindsym $mod+d exec --no-startup-id rofi -show run
 
 # Change focused window (Vim keybinds)
 bindsym $mod+j focus left
@@ -99,11 +100,23 @@ bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
 # Names and variables for workspaces
-set $ws1 ""
-set $ws2 ""
-set $ws3 ""
-set $ws4 ""
-set $ws5 ""
+
+#set $ws1 ""
+#set $ws2 ""
+#set $ws3 ""
+#set $ws4 ""
+#set $ws5 ""
+#set $ws6 "6"
+#set $ws7 "7"
+#set $ws8 "8"
+#set $ws9 "9"
+#set $ws10 "10"
+
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
 set $ws6 "6"
 set $ws7 "7"
 set $ws8 "8"
@@ -137,9 +150,13 @@ bindsym $mod+Shift+0 move container to workspace $ws10
 # Assign specific containers to applications 
 assign [class="discord"] $ws2 
 assign [class="Brave-browser"] $ws1
+assign [class="crx_pjibgclleladliembfgfagdaldikeohf"] $ws5
+assign [class="firefox"] $ws1
 assign [class="kitty"] $ws3
 assign [class="Spotify"] $ws5
 assign [class="Thunar"] $ws4
+
+
 
 
 # Reload .conf
@@ -174,17 +191,13 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # i3-bar configurtion (bumblebee-status, polybar..)
-bar {	
-	position top 
-        #status_command i3status
-	status_command ~/.config/bumblebee-status/bumblebee-status \
-	-m cpu memory time kernel \
-	-t iceberg-rainbow 
 
-}
+
+exec_always bash ~/.config/polybar/launch.sh --shapes 
+exec_always bash ~/.config/polybar/shapes/scripts/pywal.sh ~/Pictures/wallpapers/Random/69.png
 
 # Wallpaper
-exec_always nitrogen --set-scaled ~/Pictures/Wallpapers/wallhaven-v9zpep.png
+exec_always nitrogen --set-scaled ~/Pictures/wallpapers/Random/69.png
 
 # Windows Gaps
 gaps inner 10
@@ -203,6 +216,12 @@ client.urgent           #2f343a #900000 #ffffff #900000   #900000
 client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 
 client.background       #ffffff
+
+
+# Brightness keys
+
+bindsym $mod+Ctrl+b exec xbacklight -10
+bindsym $mod+Ctrl+d exec xbacklight +10
 
 # Picom
 #exec --no-startup-id picom --experimental-backends --config ~/.config/picom/picom.conf
